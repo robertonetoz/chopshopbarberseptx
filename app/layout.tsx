@@ -20,13 +20,14 @@ const description =
   "Fades, tapers, kids cuts, beard trims and hot towel shaves on N Zaragoza Rd in East El Paso. Walk-ins welcome, appointments recommended. Call (915) 257-1446.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://chopshopbarberseptx.com"),
+  metadataBase: new URL("https://chopshopbarberseptx.vercel.app"),
   title: "Chop Shop Barbers | Barbershop in East El Paso, TX",
   description,
   openGraph: {
     title: "Chop Shop Barbers | El Paso, TX",
+    url: "/",
+    siteName: "Chop Shop Barbers",
     description,
-    images: [{ url: "/images/shop-wall.jpg", width: 1700, height: 1275 }],
     type: "website",
     locale: "en_US",
   },
@@ -41,7 +42,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BarberShop",
   name: shop.legalName,
-  image: "/images/shop-wall.jpg",
+  image: "https://chopshopbarberseptx.vercel.app/images/shop-wall.jpg",
   telephone: shop.phoneE164,
   priceRange: "$$",
   address: {

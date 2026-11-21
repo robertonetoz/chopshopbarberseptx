@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #050506;
+  --color-asphalt: #0e0f11;
+  --color-gunmetal: #17191c;
+  --color-line: #2a2d32;
+  --color-steel: #949ba4;
+  --color-chrome: #e8ebef;
+  --color-pole-red: #e3262d;
+  --color-pole-blue: #1f8fe8;
+  --color-signal: #3ddc84;
+
+  --font-display: var(--font-big-shoulders), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-barlow), system-ui, sans-serif;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  background: var(--color-ink);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-chrome);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-chrome);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-chrome);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Polished chrome lettering, same banding as the logo. */
+.chrome {
+  background-image: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #eef1f4 30%,
+    #b9bfc6 47%,
+    #3c4148 50%,
+    #6b727a 58%,
+    #d7dce1 78%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Brushed metal surface for panels. */
+.brushed {
+  background-color: var(--color-gunmetal);
+  background-image:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0));
+}
+
+/* Barber-pole stripes. Used sparingly: progress bar, booking rail, pole dividers. */
+.pole {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-pole-red) 0 10px,
+    #f4f4f4 10px 20px,
+    var(--color-pole-blue) 20px 30px,
+    #f4f4f4 30px 40px
+  );
+  background-size: 56.57px 56.57px;
+  animation: pole-spin 1.6s linear infinite;
+}
+
+@keyframes pole-spin {
+  to {
+    background-position: 56.57px 0;
+  }
+}
+
+/* Light sweep across the chrome logo, masked to the logo's own shape. */
+.glint {
+  -webkit-mask-image: url("/images/logo-chrome.png");
+  mask-image: url("/images/logo-chrome.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    transparent 42%,
+    rgb(255 255 255 / 0.55) 50%,
+    transparent 58%,
+    transparent 100%
+  );
+  background-size: 300% 100%;
+  background-position: 120% 0;
+  pointer-events: none;
+  animation: glint 8s var(--ease-out-quint) 1.4s infinite;
+}
+
+@keyframes glint {
+  0% {
+    background-position: 120% 0;
+  }
+  22%,
+  100% {
+    background-position: -20% 0;
+  }
+}
+
+.grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.leader {
+  background-image: radial-gradient(circle, rgb(148 155 164 / 0.5) 1px, transparent 1.5px);
+  background-size: 8px 4px;
+  background-repeat: repeat-x;
+  background-position: left center;
+}
+
+/* Horizontal rails line up with the 80rem content column but bleed to the edge. */
+.rail-pad {
+  --rail: 1rem;
+  padding-inline: var(--rail);
+  scroll-padding-inline: var(--rail);
+}
+@media (min-width: 40rem) {
+  .rail-pad {
+    --rail: 1.5rem;
+  }
+}
+@media (min-width: 64rem) {
+  .rail-pad {
+    --rail: max(2rem, calc((100vw - 80rem) / 2 + 2rem));
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .pole,
+  .glint {
+    animation: none;
+  }
+  .glint {
+    display: none;
+  }
+}

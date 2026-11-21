@@ -242,15 +242,15 @@ export function Booking() {
 
             <fieldset className="min-w-0">
               <legend className="font-display text-2xl font-bold text-chrome">Day</legend>
-              <div className="no-scrollbar -mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1">
+              <div className="mt-4 grid grid-cols-4 gap-2 sm:grid-cols-5">
                 {now === null
-                  ? Array.from({ length: 6 }).map((_, i) => (
-                      <span key={i} className="h-[68px] w-[84px] shrink-0 animate-pulse rounded-xl bg-gunmetal" />
+                  ? Array.from({ length: 10 }).map((_, i) => (
+                      <span key={i} className="h-[68px] animate-pulse rounded-xl bg-gunmetal" />
                     ))
                   : days.map((d) => {
                       const on = d.key === day?.key;
                       return (
-                        <label key={d.key} className="relative shrink-0 cursor-pointer">
+                        <label key={d.key} className="relative cursor-pointer">
                           <input
                             type="radio"
                             name="day"
@@ -263,7 +263,7 @@ export function Booking() {
                             className="peer sr-only"
                           />
                           <span
-                            className={`flex w-[84px] flex-col items-center rounded-xl border py-3 transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-chrome ${
+                            className={`flex w-full flex-col items-center rounded-xl border py-3 transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-chrome ${
                               on ? chipOn : chipOff
                             }`}
                           >
